@@ -10,14 +10,20 @@ class CLIPEmbedding(nn.Module):
         super().__init__()
 
         self.token_embedding = nn.Embedding(n_vocab, n_embed)
-        self.position_embedding = nn.Parameter(torch.zeros(1, n_tokens, n_embed))
+        self.position_embedding = nn.Parameter(
+            torch.zeros(n_tokens, n_embed)
+        )
 
     def forward(self, tokens: torch.Tensor) -> torch.FloatTensor:
-        #tokens: (batch_size, seq_len)
-        token_embeddings = self.token_embedding(tokens)  # (batch_size, seq_len, embed_dim)
-        position_embeddings = self.position_embedding[:, :tokens.size(1), :]  # (1, seq_len, embed_dim)
+        # tokens: (batch_size, seq_len)
 
-        return token_embeddings + position_embeddings  # (batch_size, seq_len, embed_dim)
+        token_embeddings = self.token_embedding(tokens)
+        # (batch_size, seq_len, embed_dim)
+
+        position_embeddings = self.position_embedding[:tokens.size(1), :]
+        # (seq_len, embed_dim)
+
+        return token_embeddings + position_embeddings
 
 
 class CLIPLayer(nn.Module):
