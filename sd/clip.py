@@ -54,7 +54,7 @@ class CLIP(nn.Module):
         super().__init__() 
         self.embedding = CLIPEmbedding(49408, 768, 77) # vocab_size, embed_dim, max_length
 
-        self.layers = nn.Module([
+        self.layers = nn.ModuleList([
             CLIPLayer(12, 768) for _ in range(12) # 12 transformer layers
         ])
 
