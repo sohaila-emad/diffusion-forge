@@ -1,0 +1,19 @@
+# Core Deep Learning
+torch
+torchvision
+
+# Hugging Face
+transformers
+huggingface_hub
+
+# Model Checkpoint Compatibility
+pytorch-lightning
+
+# Numerical Computing
+numpy
+
+# Image Processing
+Pillow
+
+# Utilities
+tqdm
