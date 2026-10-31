@@ -29,6 +29,9 @@ The implementation uses pretrained Stable Diffusion 1.5 checkpoint weights while
 
 ## 🧠 Architecture & Implementation
 
+<img width="1136" height="578" alt="image" src="https://github.com/user-attachments/assets/daa3279d-0ce5-493e-8399-c9ddc9fb80f0" />
+
+
 The project reconstructs the major building blocks of Stable Diffusion 1.5:
 
 | Component | Implementation |
