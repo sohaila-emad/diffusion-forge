@@ -227,3 +227,56 @@ The goal of DiffusionForge is to understand the engineering and mathematical fou
 **Not just using Stable Diffusion. Understanding how it works, one component at a time.**
 
 ---
+
+
+---
+
+## Running through the CLI in Google Colab
+
+DiffusionForge's custom Stable Diffusion 1.5 implementation is intended to run
+on a GPU runtime. If your local GPU is not sufficient, use Google Colab:
+
+1. Open a Colab notebook and select **Runtime → Change runtime type → GPU**.
+2. Clone this repository and change into its root directory.
+3. Install the dependencies from `requirements.txt`.
+4. Run the environment check:
+
+```bash
+!python sd/cli.py doctor
+```
+
+5. Download or verify the pretrained checkpoint:
+
+```bash
+!python sd/cli.py setup
+```
+
+6. Generate an image:
+
+```bash
+!python sd/cli.py txt2img \
+  --prompt "A white cat with wide eyes sitting on a wooden table" \
+  --cfg-scale 8 \
+  --steps 50 \
+  --seed 42 \
+  --output outputs/cat.png
+```
+
+7. Transform an image:
+
+```bash
+!python sd/cli.py img2img \
+  --input images/cat.jpg \
+  --prompt "A watercolor painting of the same cat" \
+  --strength 0.8 \
+  --output outputs/cat_watercolor.png
+```
+
+The CLI reuses the existing `model_loader.py` and `pipeline.py`. Model components
+are initially loaded on CPU, then moved to the selected device by the existing
+pipeline as needed and returned to CPU between stages. The checkpoint is
+downloaded separately and is not included in this repository.
+
+**Note:** The first generation may take longer because the checkpoint and
+dependencies need to be downloaded. A Colab runtime must remain connected while
+inference is running. CPU-only execution is not recommended for this model.
